@@ -1,0 +1,19 @@
+-------------------------------------
+| Test   | Function |     Sender Address    | Test Time | Status | Txn Hash |
+|-----|:-------:|:-------:| ------:|------:|:------:|
+accounts[0] should deploy ConstitutionalDNA TestInstance | constructor | 0x1e267261fb0dc55f94fa3127b609e9f7fbfb7adc | 118 | passed | [0x8dc775ac8ac0f9bcaba157b627bd8472c9faad1f7ccda38a9cae3d0e67610ffb](https://testnet.etherscan.io/tx/0x8dc775ac8ac0f9bcaba157b627bd8472c9faad1f7ccda38a9cae3d0e67610ffb)
+should set consensusX address from founderAddress | setHome | 0x1e267261fb0dc55f94fa3127b609e9f7fbfb7adc | 1064 | passed | [0x2b15603715afa420ab7b42b0afce22db3876e4c7b5d249830afe37a9ed491219](https://testnet.etherscan.io/tx/0x2b15603715afa420ab7b42b0afce22db3876e4c7b5d249830afe37a9ed491219)
+should set consensusX address from non founderAddress | setHome | 0x6cec92651e05c371d5b6d81ca27f624e34cd216e |  | failed | 
+should add non-amendable article from founderAddress | addArticle | 0x1e267261fb0dc55f94fa3127b609e9f7fbfb7adc | 1096 | passed | [0xb1ccb73e95e659d5abec87fd545b67b3fc27c80d5f317359b0509df37cbd30f9](https://testnet.etherscan.io/tx/0xb1ccb73e95e659d5abec87fd545b67b3fc27c80d5f317359b0509df37cbd30f9)
+should add ammendable article from founderAddress | addArticle | 0x1e267261fb0dc55f94fa3127b609e9f7fbfb7adc | 1095 | passed | [0xaa07e5a8c2e03dd057ca61c4edeef73cd91805fb7cbab2cee831f9275c5743d1](https://testnet.etherscan.io/tx/0xaa07e5a8c2e03dd057ca61c4edeef73cd91805fb7cbab2cee831f9275c5743d1)
+should add an item to non existing article | addArticleItem | 0x1e267261fb0dc55f94fa3127b609e9f7fbfb7adc | 1107 | passed | [0xade98977dcceea9360c746490e57bd8b3a9105684c6a9b91445b007df25ac264](https://testnet.etherscan.io/tx/0xade98977dcceea9360c746490e57bd8b3a9105684c6a9b91445b007df25ac264)
+should add an item to an existing ammendable article | addArticleItem | 0x1e267261fb0dc55f94fa3127b609e9f7fbfb7adc | 1134 | passed | [0x42a26ac254092e2ab795ef077b72dfd8abd4057b8fc39bb5a94931854f2fb48b](https://testnet.etherscan.io/tx/0x42a26ac254092e2ab795ef077b72dfd8abd4057b8fc39bb5a94931854f2fb48b)
+should add article from non founderAddress | addArticle | 0x6cec92651e05c371d5b6d81ca27f624e34cd216e |  | failed | 
+should add an item to an existing article from non founder Address | addArticleItem | 0x6cec92651e05c371d5b6d81ca27f624e34cd216e |  | failed | 
+should add an item to an invalid article no | addArticleItem | 0x1e267261fb0dc55f94fa3127b609e9f7fbfb7adc |  | failed | 
+should fail to amend an article from non consensusX address | amendArticleItem | 0x6cec92651e05c371d5b6d81ca27f624e34cd216e |  | failed | 
+should fail to amend a non-amendable article item | amendArticleItem | 0x41ce2cef1a4141ac6ec5ee9d6a555e8036318cfe |  | failed | 
+should try and amend an ammendable article item | amendArticleItem | 0x41ce2cef1a4141ac6ec5ee9d6a555e8036318cfe | 1089 | passed | [0x6e9419a65bc8cf31a62459790ce346aa42dcaf56d1d353d38a85e1d52acec90d](https://testnet.etherscan.io/tx/0x6e9419a65bc8cf31a62459790ce346aa42dcaf56d1d353d38a85e1d52acec90d)
+getArticleItem> get an article item  | getArticleItem | 0x41ce2cef1a4141ac6ec5ee9d6a555e8036318cfe | 1120 | passed | [0x646576656c6f7065722072656c6174696f6e73,1,false,0x](https://testnet.etherscan.io/tx/0x646576656c6f7065722072656c6174696f6e73,1,false,0x)
+should add a founding team from founderAddress | setfoundingTeam | 0x1e267261fb0dc55f94fa3127b609e9f7fbfb7adc | 1168 | passed | [0xc65943e5303f6ea63d663dacb89dc8d1ea7ac8f3d6036c2b0b17cf787b866dd1](https://testnet.etherscan.io/tx/0xc65943e5303f6ea63d663dacb89dc8d1ea7ac8f3d6036c2b0b17cf787b866dd1)
+should update a founding team members profile | updateProfile | 0x1e267261fb0dc55f94fa3127b609e9f7fbfb7adc | 112 | passed | [0xc3fd5d81fe2b1ef3310b823e1108123584ad8a4b89de6ad50bc37cd749dc14d5](https://testnet.etherscan.io/tx/0xc3fd5d81fe2b1ef3310b823e1108123584ad8a4b89de6ad50bc37cd749dc14d5)

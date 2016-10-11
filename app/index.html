@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PromissoryToken WebUI</title>
+
+	<style type="text/css">
+    body {
+      background-color: #FFFFFF;
+    }
+    .ui.menu .item img.logo {
+      margin-right: 1.5em;
+    }
+    .main.container-fluid {
+      margin-top: 70px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    
+  </style>
+
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css" rel='stylesheet' type='text/css'>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"> </script>
+
+	
+	<!-- <script src="./web3.js"></script> -->
+	<script src="./app.js"></script>
+	
+</head>
+<body>
+
+
+<div class="ui fixed inverted menu">
+    <div class="ui container">
+      <a href="#" class="header item">PromissoryToken</a>
+      <!-- -->
+    </div>
+  </div>
+
+  <div class="ui main container-fluid">
+
+    <div class="ui grid">
+
+       <div class="six wide column">
+       		<button id="btnSetPrepaidModal" class="negative ui button">setPrepaid</button>
+       </div>
+       <div class="six wide column"></div>
+
+
+      <div class="six wide column">
+      <h4 class="ui horizontal divider header"><i class="tag icon"></i>Accounts</h4>
+            <!-- Balance Cards -->
+            <div id="card-accounts"> Loading accounts .... </div>
+
+      </div>
+      <div class="four wide column">
+      	<h4 class="ui horizontal divider header"><i class="tag icon"></i>Contract Data</h4>
+		<div id="card-variables"> Loading contract data .... </div>      	
+
+      </div>
+      <div class="four wide column">
+      	<h4 class="ui horizontal divider header"><i class="tag icon"></i>Events</h4>
+      	<div id="card-logs"> Event log .... </div>      	
+
+      </div>
+    </div>
+  
+  </div>
+
+
+
+
+<!-- **************************************************** -->
+	
+<!-- _backer
+	_tokenPrice
+	_tokenAmount
+	_privatePhrase
+	_backerRank
+ -->	
+ 	<div class="ui modal">
+	  <div class="header">setPrepaid</div>
+	  <div class="content">
+		<form class="ui form" id="setPrepaidForm">
+		  <div class="field">
+		    <label>_backer</label>
+		    <input type="text" name="_backer" placeholder="_backer">
+		  </div>
+		  <div class="field">
+		    <label>_tokenPrice</label>
+		    <input type="text" name="_tokenPrice" placeholder="_tokenPrice">
+		  </div>
+		  <div class="field">
+		    <label>_tokenAmount</label>
+		    <input type="text" name="_tokenAmount" placeholder="_tokenAmount">
+		  </div>
+		  <div class="field">
+		    <label>_privatePhrase</label>
+		    <input type="text" name="_privatePhrase" placeholder="_privatePhrase">
+		  </div>
+		  <div class="field">
+		    <label>_backerRank</label>
+		    <input type="text" name="_backerRank" placeholder="_backerRank">
+		  </div>
+		  <button class="ui button" type="submit">Submit</button>
+		</form>
+	  </div>
+	  <div class="actions">
+	    <!--<div class="ui approve button">Buy</div> -->
+	    <div class="ui cancel button">Cancel</div>
+	  </div>
+	</div>
+
+<!-- **************************************************** -->
+
+
+<!--  Account Template -->
+<script type="text/template" id="template-accounts">
+
+	<table class="ui very basic collapsing celled table">
+	  <thead>
+	    <tr><th>Account</th>
+	    <th>Action</th>
+	  </tr></thead>
+	  <tbody>
+	    <% _.each(data, function(item){  %>
+		    <tr>
+		      <td>
+		          <div class="content">
+		            <%= item.acc %>
+		            <div class="sub header">  
+		            	<strong>Balance: </strong> <a class="ui green label">  <%= item.bal.toFixed(3) %> ETH</a>
+		            </div>
+		        </div>
+		      </td>
+		      <td>
+			       <button id="<%= item.acc %>" id="<%= item.acc %>" class="ui primary button">
+		                Buy Tokens
+		            </button>
+		      </td>
+		    </tr>
+	    <% }); %>
+	  </tbody>
+	</table>
+
+</script>
+
+
+<!-- Contract data Template -->
+<script type="text/template" id="template-variables">
+	<table class="ui very basic collapsing celled table">
+	  <thead>
+	    <tr><th>Variable Name</th>
+	    <th>Value</th>
+	  </tr></thead>
+	  <tbody>
+	    <% _.each(data, function(item){  %>
+		    <tr>
+		      <td>
+		        <div class="content"><%= item.name %></div>
+		      </td>
+		      <td>
+			      <div class="content"><%= item.val %></div>
+		      </td>
+		    </tr>
+	    <% }); %>
+	  </tbody>
+	</table>
+</script>
+
+
+
+</body>
+</html>
