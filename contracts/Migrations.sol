@@ -8,7 +8,7 @@ contract Migrations {
 
   modifier restricted() {
     if (msg.sender != owner) throw;
-    _
+    _;
   }
 
   function Migrations() {
