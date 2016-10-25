@@ -3,7 +3,7 @@
 > First stage in the evolution of Superdao     
 ---
 
-These contracts represent the foundational building blocks of the modular superdao framework. The foundation consist of the constitutional guiding principles on which the DAO(Superdao) framework is built. Also available is the private promissory contract that enables progressive development of the DAO frame work and services. At deployment of the next stage of SuperDAO, both contracts will be injected as building blocks to enable token redemption, progressive decentralization and a baseline immutable social contract that ecapsulates the essense of how SuperDAO evolves and operates.
+These contracts represent the foundational building blocks of the modular superdao framework. The foundation consist of the constitutional guiding principles on which the DAO(Superdao) framework is built. Also available is the private promissory contract that fuels progressive development of the DAO frame work and services. At deployment of the next stage of SuperDAO, both contracts will be injected as building blocks to enable token redemption, progressive decentralization and a baseline immutable social contract that ecapsulates the essense of how SuperDAO evolves and operates. This represents small part to a larger system described in documentation and implementation in [Superdao development repository](https://gitlab.com/BM-2cV87rXv7cVFLWZGnSJN14BWHHrG9Aj7Zr/Superdao) that is to be released incrementally.
 
 
 
