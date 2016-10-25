@@ -115,8 +115,6 @@ Sample result Files :
 #<a name="Contributors"></a>
 ### Contributors
 
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
-
 [Ola](https://github.com/innovator256)   
 [Patrick](https://github.com/patrickgamer)    
 [Panos](https://github.com/ppanos)   
