@@ -1,4 +1,4 @@
-//pragma solidity ^0.4.0;
+pragma solidity ^0.4.0;
 
 //This contract is backed by the constitution of SuperDAO deployed at : .
 //The constitution of the superdao is the social contract, terms, founding principles and definitions of the vision,
@@ -208,6 +208,7 @@ contract PromissoryToken {
     * @dev Purchase new Superdao Tokens if the amount of tokens are still available for purchase
     */
     function claim()
+        payable
         external
         //payable
         MinimumBackersClaimed
@@ -378,17 +379,17 @@ contract PromissoryToken {
 
     modifier founderCall{
         if (msg.sender != founder) throw;
-        _
+        _;
     }
 
     modifier backerCheck(uint _withdrawalID){
         if(backers[msg.sender].length == 0 || withdrawals[_withdrawalID].spent == true || withdrawalsVotes[msg.sender][_withdrawalID] == true) throw;
-        _
+        _;
     }
 
     modifier EarliestBackersSet{
        if(earlyBackerList.length < numOfBackers) throw;
-       _
+       _;
     }
 
     modifier MinimumBackersClaimed(){
@@ -397,7 +398,7 @@ contract PromissoryToken {
         (claimedPrepaidUnits * 100 / prepaidUnits) < minimumPrepaidClaimedPercent) {
             throw;
         }
-      _
+      _;
     }
 
     /*

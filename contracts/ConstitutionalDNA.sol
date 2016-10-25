@@ -1,4 +1,4 @@
-  //pragma solidity ^0.4.0;
+  pragma solidity ^0.4.0;
 
   /**
   * @title ConstitutionalDNA
@@ -226,63 +226,63 @@
       modifier founderCheck()  {
           var (tempAddr, tempRank) = (foundingTeam[msg.sender].addr, foundingTeam[msg.sender].rank);
           if(tempAddr != msg.sender || tempRank != 1 ) throw;
-          _
+          _;
       }
 
       modifier foundationNotSet(){
           if(foundingTeam[msg.sender].rank != 1 && mutify[foundingTeamAddresses[0]] == false) throw;
-          _
+          _;
       }
 
       modifier mutifyAlreadySet(){
           if (mutify[msg.sender] == true) throw;
-          _
+          _;
       }
 
       modifier foundingTeamCheck(){
           if(msg.sender != foundingTeam[msg.sender].addr) throw;
-          _
+          _;
       }
 
       modifier articleSet(uint _articleNumber){
           if(constitutionalArticles[_articleNumber].set != true) throw;
-          _
+          _;
       }
 
       modifier updaterCheck(){
           if (msg.sender != home) throw;
-          _
+          _;
       }
 
       modifier once(){
           if (onceFlag == true) throw;
           onceFlag = true;
-          _
+          _;
       }
 
       modifier amendable(uint _articleNum){
           if (constitutionalArticles[_articleNum].amendable == false) throw;
-          _
+          _;
       }
 
       modifier homeIsSet(){
           if (home == 0x0) throw;
-          _
+          _;
       }
 
       modifier ratified(){
           if (foundingTeam[msg.sender].rank == 1 && isRatified == true) throw;
-          _
+          _;
       }
 
       modifier foundingTeamMatchRank(uint[] _founderRanks,address[] _founderAddrs){
           if(_founderRanks.length != _founderAddrs.length) throw;
-          _
+          _;
       }
 
       modifier foundingTeamListHasFounder(uint[] _founderRanks,address[] _founderAddrs){
           if(_founderAddrs[0] != foundingTeamAddresses[0] || _founderRanks[0] != 1) throw;
-          _
+          _;
       }
 
       /*
