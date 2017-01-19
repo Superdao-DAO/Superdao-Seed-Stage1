@@ -49,7 +49,7 @@ contract PromissoryToken {
     uint public claimedUnits = 0; //claimed tokens out of 3 million tokens
     uint public claimedPrepaidUnits = 0; //claimed tokens out of the early backer's tokens/prepaidUnits
     uint public redeemedTokens = 0; //number of tokens out of claimed tokens, redeemed by superdao token call
-    uint public lastPrice; //latest price of token acquired by backer in Wei
+    uint public lastPrice = 0; //latest price of token acquired by backer in Wei
     uint public numOfBackers; //number of early backers
 
     struct backerData {
@@ -396,7 +396,7 @@ contract PromissoryToken {
     modifier MinimumBackersClaimed(){
       if(prepaidUnits == 0 ||
         claimedPrepaidUnits == 0 ||
-        (claimedPrepaidUnits * 100 / prepaidUnits) < minimumPrepaidClaimedPercent) {
+        (claimedPrepaidUnits * divisor / prepaidUnits) < minimumPrepaidClaimedPercent) {
             throw;
         }
       _;
