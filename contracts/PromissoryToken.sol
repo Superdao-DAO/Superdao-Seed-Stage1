@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.8;
 
 //This contract is backed by the constitution of SuperDAO deployed at : .
 //The constitution of the superdao is the social contract, terms, founding principles and definitions of the vision,
@@ -40,6 +40,8 @@ contract PromissoryToken {
     mapping(address => bytes32) tempHashes; // structure to contain new address to hash storage,
     address cofounder;//helper to aid founder key exchange in case of key loss
     address [] public previousFounders; //list of addresses replaced using the switching process.
+    uint constant discountAmount = 60; //discount amount
+    uint constant divisor = 100; //divisor to get discount value
 
     uint public constant minimumPrepaidClaimedPercent = 65;
     uint public promissoryUnits = 3000000; //amount of tokens contants set
@@ -148,7 +150,7 @@ contract PromissoryToken {
     * @param _backer The address of the Superdao backer
     * @param _tokenPrice The price/rate at which the Superdao tokens were bought
     * @param _tokenAmount The total number of Superdao token purcgased at the indicated rate
-    * @param _privatePhrase Secret or passphrase for authentication
+    * @param _privatePhrase Secret or passphrase
     * @param _backerRank Rank of the backer in the backers list
     * @return Thre index of _backer  in the backers list
     */
@@ -180,7 +182,7 @@ contract PromissoryToken {
     * @param _index index of tokens to claim
     * @param _boughtTokensPrice Price at which the Superdao tokens were bought
     * @param _tokenAmount Number of Superdao tokens to be claimed
-    * @param _privatePhrase Secret key for authentication of Superdao tokens ownership
+    * @param _privatePhrase Secret key for Offline shared pre-hashed phrase offline price negotiation for online attestation of uperdao tokens ownership
     * @param _backerRank Backer rank of the backer in the Superdao
     */
     function claimPrepaid(uint _index, uint _boughtTokensPrice, uint _tokenAmount, string _privatePhrase, uint _backerRank)
@@ -210,13 +212,12 @@ contract PromissoryToken {
     function claim()
         payable
         external
-        //payable
         MinimumBackersClaimed
    {
         if (lastPrice == 0) throw;
 
         //Effective discount for Pre-crowdfunding backers of 40% Leaving effective rate of 60%
-        uint discountPrice = lastPrice * 60 / 100;
+        uint discountPrice = lastPrice * discountAmount / divisor;
 
         uint tokenAmount = (msg.value / discountPrice);//Effect the discount rate 0f 40%
 
