@@ -209,12 +209,14 @@ contract PromissoryToken {
     * @notice `msg.sender.address()` is Purchasing `(msg.value / lastPrice).toFixed(0)` superDAO Tokens at `lastPrice`
     * @dev Purchase new superDAO Tokens if the amount of tokens are still available for purchase
     */
-    function claim()
+    function ()
         payable
-        external
         MinimumBackersClaimed
    {
         if (lastPrice == 0) throw;
+
+        //don`t accept transactions with zero value
+        if (msg.value == 0) throw;
 
         //Effective discount for Pre-crowdfunding backers of 40% Leaving effective rate of 60%
         uint discountPrice = lastPrice * discountAmount / divisor;
@@ -407,8 +409,10 @@ contract PromissoryToken {
      * This function gets executed if a transaction with invalid data is sent to
      * the contract or just ether without data.
      */
-    function () {
-        throw;
-    }
+     /*
+        function () {
+            throw;
+        }
+    */
 
 }
