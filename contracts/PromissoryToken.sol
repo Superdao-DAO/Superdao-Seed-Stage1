@@ -1,12 +1,12 @@
 pragma solidity ^0.4.8;
 
-//This contract is backed by the constitution of SuperDAO deployed at : .
-//The constitution of the superdao is the social contract, terms, founding principles and definitions of the vision,
-//mission, anti-missions, rules and operation guidelines of Superdao.
-//The total number of 3,000,000 represents 3% of 100,000,000 immutable number of superdao tokens,
+//This contract is backed by the constitution of superDAO deployed at : .
+//The constitution of the superDAO is the social contract, terms, founding principles and definitions of the vision,
+//mission, anti-missions, rules and operation guidelines of superDAO.
+//The total number of 3,000,000 represents 3% of 100,000,000 immutable number of superDAO tokens,
 //which is the alloted budget of operation for the earliest funding activities.
-//Every prommissory token is exchangeable for the real SuperDAO tokens on a one on one basis.
-//Promissiory contract will be deployed with the actual superdao token contract.
+//Every prommissory token is exchangeable for the real superDAO tokens on a one on one basis.
+//Promissiory contract will be deployed with the actual superDAO token contract.
 //Early backers can call the "redeem" function on the actual token contract to exchange promissory tokens for the final tokens.
 
 /**
@@ -48,8 +48,8 @@ contract PromissoryToken {
     uint public prepaidUnits = 0; //prepaid and set by founder out of 3 million tokens
     uint public claimedUnits = 0; //claimed tokens out of 3 million tokens
     uint public claimedPrepaidUnits = 0; //claimed tokens out of the early backer's tokens/prepaidUnits
-    uint public redeemedTokens = 0; //number of tokens out of claimed tokens, redeemed by superdao token call
-    uint public lastPrice; //latest price of token acquired by backer in Wei
+    uint public redeemedTokens = 0; //number of tokens out of claimed tokens, redeemed by superDAO token call
+    uint public lastPrice = 0; //latest price of token acquired by backer in Wei
     uint public numOfBackers; //number of early backers
 
     struct backerData {
@@ -147,9 +147,9 @@ contract PromissoryToken {
     /**
     * @notice Adding `_backer.address()` as an early backer
     * @dev Add Early backers to Contract setting the transacton details
-    * @param _backer The address of the Superdao backer
-    * @param _tokenPrice The price/rate at which the Superdao tokens were bought
-    * @param _tokenAmount The total number of Superdao token purcgased at the indicated rate
+    * @param _backer The address of the superDAO backer
+    * @param _tokenPrice The price/rate at which the superDAO tokens were bought
+    * @param _tokenAmount The total number of superDAO token purcgased at the indicated rate
     * @param _privatePhrase Secret or passphrase
     * @param _backerRank Rank of the backer in the backers list
     * @return Thre index of _backer  in the backers list
@@ -177,13 +177,13 @@ contract PromissoryToken {
     }
 
     /**
-    * @notice Claiming `_tokenAmount.number()` Superdao tokens by `msg.sender.address()`
-    * @dev Claim Superdao Early backer tokens
+    * @notice Claiming `_tokenAmount.number()` superDAO tokens by `msg.sender.address()`
+    * @dev Claim superDAO Early backer tokens
     * @param _index index of tokens to claim
-    * @param _boughtTokensPrice Price at which the Superdao tokens were bought
-    * @param _tokenAmount Number of Superdao tokens to be claimed
+    * @param _boughtTokensPrice Price at which the superDAO tokens were bought
+    * @param _tokenAmount Number of superDAO tokens to be claimed
     * @param _privatePhrase Secret key for Offline shared pre-hashed phrase offline price negotiation for online attestation of uperdao tokens ownership
-    * @param _backerRank Backer rank of the backer in the Superdao
+    * @param _backerRank Backer rank of the backer in the superDAO
     */
     function claimPrepaid(uint _index, uint _boughtTokensPrice, uint _tokenAmount, string _privatePhrase, uint _backerRank)
         external
@@ -206,8 +206,8 @@ contract PromissoryToken {
     }
 
     /**
-    * @notice `msg.sender.address()` is Purchasing `(msg.value / lastPrice).toFixed(0)` Superdao Tokens at `lastPrice`
-    * @dev Purchase new Superdao Tokens if the amount of tokens are still available for purchase
+    * @notice `msg.sender.address()` is Purchasing `(msg.value / lastPrice).toFixed(0)` superDAO Tokens at `lastPrice`
+    * @dev Purchase new superDAO Tokens if the amount of tokens are still available for purchase
     */
     function claim()
         payable
@@ -215,6 +215,10 @@ contract PromissoryToken {
         MinimumBackersClaimed
    {
         if (lastPrice == 0) throw;
+
+        //don`t accept transactions with zero value
+        if (msg.value == 0) throw;
+
 
         //Effective discount for Pre-crowdfunding backers of 40% Leaving effective rate of 60%
         uint discountPrice = lastPrice * discountAmount / divisor;
@@ -234,7 +238,7 @@ contract PromissoryToken {
     }
 
     /**
-     * @notice checking `_backerAddress.address()` Superdao Token balance: `index`
+     * @notice checking `_backerAddress.address()` superDAO Token balance: `index`
      * @dev Check Token balance by index of backer, return values can be used to instantiate a backerData struct
      * @param _backerAddress The Backer's address
      * @param index The balance to check
@@ -256,7 +260,7 @@ contract PromissoryToken {
 
     /**
     * @notice Approving withdrawal `_withdrawalID`
-    * @dev Approve a withdrawal from the Superdao and mark the withdrawal as spent
+    * @dev Approve a withdrawal from the superDAO and mark the withdrawal as spent
     * @param _withdrawalID The ID of the withdrawal
     */
     function approveWithdraw(uint _withdrawalID)
@@ -325,7 +329,7 @@ contract PromissoryToken {
     }
 
     /**
-    * @notice Backer `_bacherAddr.address()` is redeeming `_amount` Superdao Tokens
+    * @notice Backer `_bacherAddr.address()` is redeeming `_amount` superDAO Tokens
     * @dev Check if backer tokens have been claimed but not redeemed, then redeem them
     * @param _amount The total number of redeemable tokens
     * @param _backerAddr The address of the backer
@@ -396,7 +400,7 @@ contract PromissoryToken {
     modifier MinimumBackersClaimed(){
       if(prepaidUnits == 0 ||
         claimedPrepaidUnits == 0 ||
-        (claimedPrepaidUnits * 100 / prepaidUnits) < minimumPrepaidClaimedPercent) {
+        (claimedPrepaidUnits * divisor / prepaidUnits) < minimumPrepaidClaimedPercent) {
             throw;
         }
       _;
