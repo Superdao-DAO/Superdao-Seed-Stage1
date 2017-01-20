@@ -113,7 +113,7 @@ contract PromissoryToken {
     * @dev founderSwitchAddress founder indicates intent to switch addresses with new address,
     * hash of pass phrase and a "onetime shared phrase shared with coufounder"
     * @param _founderHash Secret Key to be used to confirm Address update
-    * @param _oneTimesharedPhrase Secret phrase to be shared with coFounder to approve Address update
+    * @param _oneTimesharedPhrase Shared pre-hashed Secret key for offline trust to be shared with coFounder to approve Address update
     * @return True if Address switch request successfully created and Temporary hash Values set
     */
     function founderSwitchRequest(bytes32 _founderHash, bytes32 _oneTimesharedPhrase) returns (bool success){
@@ -131,7 +131,7 @@ contract PromissoryToken {
     * switch by founder. Must have a one time shared phrase thats is shared with founder that corresponding with a
     * hashed value.
     * @param _newFounderAddr The address of Founder to be newly set
-    * @param _oneTimesharedPhrase Secret Keyword to be provide access to the approval function
+    * @param _oneTimesharedPhrase Shared pre-hashed Secret key for offline trust, to provide access to the approval function
     * @return True if new Founder address successfully approved
     */
     function cofounderApproveSwitchRequest(address _newFounderAddr, bytes32 _oneTimesharedPhrase) external returns (bool success){
@@ -150,7 +150,7 @@ contract PromissoryToken {
     * @param _backer The address of the superDAO backer
     * @param _tokenPrice The price/rate at which the superDAO tokens were bought
     * @param _tokenAmount The total number of superDAO token purcgased at the indicated rate
-    * @param _privatePhrase Secret or passphrase
+    * @param _privatePhrase Shared pre-hashed Secret key for offline price negotiation to online attestation of SuperDAO tokens ownership
     * @param _backerRank Rank of the backer in the backers list
     * @return Thre index of _backer  in the backers list
     */
@@ -182,7 +182,7 @@ contract PromissoryToken {
     * @param _index index of tokens to claim
     * @param _boughtTokensPrice Price at which the superDAO tokens were bought
     * @param _tokenAmount Number of superDAO tokens to be claimed
-    * @param _privatePhrase Secret key for Offline shared pre-hashed phrase offline price negotiation for online attestation of uperdao tokens ownership
+    * @param _privatePhrase Shared pre-hashed Secret key for offline price negotiation to online attestation of SuperDAO tokens ownership
     * @param _backerRank Backer rank of the backer in the superDAO
     */
     function claimPrepaid(uint _index, uint _boughtTokensPrice, uint _tokenAmount, string _privatePhrase, uint _backerRank)
@@ -244,7 +244,7 @@ contract PromissoryToken {
      * @param index The balance to check
      * @return tokenPrice The Price at which the tokens were bought
      * @return tokenAmount The number of tokens that were bought
-     * @return privateHash Secret phrase for authentication by the backer
+     * @return Shared pre-hashed Secret key for offline price negotiation 
      * @return prepaid True if backer is an early backer
      * @return claimed True if the Token has already been claimed by the backer
      */
