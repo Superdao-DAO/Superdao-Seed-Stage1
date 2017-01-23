@@ -27,6 +27,7 @@ mapping(uint => address[]) public Batches;
             Team.push(0x28013bf56eafd00664afc2d9ba649930976227b2);
             Team.push(0xc205B5B867EC8b769836c5D356A058881e3ce056);
             Team.push(0x653851cf3B10E017B25d6bC78bEceEA6d2D3100c);
+            Team.push(0x6fC7Ff5baB36b1784047419847edC3Cc9C788b81);
         }
         
         
