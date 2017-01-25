@@ -1,18 +1,18 @@
-    pragma solidity ^0.4.8;
+pragma solidity ^0.4.8;
 
-    //Small utility that batch checks to determine if an address is an external account or a contract address
-    //This utility is useful for SuperDAO'S prommissory contract batch address input.
-    //Only regular accounts can recieve ether and can be passed into the withdrawal process
-    //Only menbers of the internal team initial leadership can pass in batches to avoid spam
+//Small utility that batch checks to determine if an address is an external account or a contract address
+//This utility is useful for SuperDAO'S prommissory contract batch address input.
+//Only regular accounts can recieve ether and can be passed into the withdrawal process
+//Only menbers of the internal team initial leadership can pass in batches to avoid spam
 
 
-    /**
-    * @title Address Checker Contract
-    * @author ola
-    * --- Collaborators ---
-    * @author anthony
-    */
-    contract AddressChecker {
+/**
+* @title Address Checker Contract
+* @author ola
+* --- Collaborators ---
+* @author anthony
+*/
+contract AddressChecker {
 
     event ContractAddressesDetected(uint _batchId, uint _badAddresses, bool badBatch);
 
@@ -106,4 +106,4 @@
         _;
     }
 
-    }
+}
