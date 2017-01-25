@@ -49,6 +49,7 @@ contract AddressChecker {
     returns (uint _batchNum, bool _goodOrBadBatch, uint _numberOfBad){
 
         uint badAddresses = 0;
+        batchNumber.length = number+1;
         Batches[batchNumber[number]] = _AddressesToBeChecked;
         for (uint i = 0; i < _AddressesToBeChecked.length; i++) {
             if (getSize(_AddressesToBeChecked[i]) > 0){
@@ -101,9 +102,15 @@ contract AddressChecker {
     }
 
 
-    modifier NotTeam{
-        // Team[msg.sender]
-        _;
+    modifier NotTeam(){
+      uint found = 0;
+      for(uint i=0;i< Team.length;i++){
+        if(msg.sender == Team[i])
+        found = 1;
+      }
+      if(found==0)
+      throw;
+      _;
     }
 
 }
